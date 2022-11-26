@@ -1,3 +1,7 @@
+def errorMessage(unableSymbol):
+    print("Sorry! Unfortunately your text cannot be translated.")
+    print(f"There's no element for {unableSymbol}")
+
 # dictionary of every element and symbol
 translations = {
     "Actinium": 'Ac',
@@ -127,6 +131,10 @@ userText = list(input("Input the text you would like to translate\n>"))
 
 workingString = ""
 for i in userText:
+    # skip spaces
+    if i == " ":
+        continue
+
     workingString = i.upper()
     # if a single letter symbol matches:
     if workingString in symbols:
