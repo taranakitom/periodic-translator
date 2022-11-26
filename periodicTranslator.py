@@ -1,6 +1,7 @@
 def errorMessage(unableSymbol):
     print("Sorry! Unfortunately your text cannot be translated.")
     print(f"There's no element for {unableSymbol}")
+    quit()
 
 # dictionary of every element and symbol
 translations = {
@@ -135,12 +136,24 @@ for i in userText:
     if i == " ":
         continue
 
-    workingString = i.upper()
-    # if a single letter symbol matches:
-    if workingString in symbols:
-        finalElements.append(elements[symbols.index(workingString)])
-        workingString = ""
+    # if last iteration we added to finalElements
+    if len(workingString) == 0:
+        workingString = i.upper()
+        if workingString in symbols:
+            finalElements.append(elements[symbols.index(workingString)])
+            workingString = ""
         continue
+    
+    # if last iteration we didn't match to a single length symbol
+    if len(workingString) == 1:
+        workingString += i.lower()
+        if workingString in symbols:
+            finalElements.append(elements[symbols.index(workingString)])
+            workingString = ""
+        else:
+            errorMessage(workingString)
+        continue
+
 
 abrieviations = []
 for element in finalElements:
